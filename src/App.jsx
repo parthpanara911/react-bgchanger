@@ -1,7 +1,15 @@
 import { useState } from "react";
 
 function App() {
-  const [color, setColor] = useState("olive");
+  // const [color, setColor] = useState("olive");
+  const [color, setColor] = useState(
+    localStorage.getItem('color') || 'olive'
+  );
+
+  const changeColor = (color) => {
+    setColor(color);
+    localStorage.setItem("color", color);
+  }
 
   const colors = ["Red", "Green", "Blue", "Gray", "Pink", "Purple", "White", "Black"];
 
@@ -10,7 +18,7 @@ function App() {
       <div className="fixed flex flex-wrap justify-center bottom-12 inset-x-0 px-2">
         <div className="flex flex-wrap justify-center gap-3 shadow-lg bg-white px-3 py-2 rounded-xl">
           {colors.map((color) => (
-            <button key={color} onClick={() => setColor(color)} className="px-4 py-1 rounded-full text-emerald-400 shadow-lg" style={{ backgroundColor: color }}>{color}</button>
+            <button key={color} onClick={() => changeColor(color)} className="px-4 py-1 rounded-full text-emerald-400 shadow-lg" style={{ backgroundColor: color }}>{color}</button>
           ))}
           {/* <button onClick={() => setColor("red")} className="outline-none px-4 py-1 rounded-full text-white shadow-lg" style={{ backgroundColor: "red" }}>Red</button>
           <button onClick={() => setColor("green")} className="outline-none px-4 py-1 rounded-full text-white shadow-lg" style={{ backgroundColor: "green" }}>Green</button>
